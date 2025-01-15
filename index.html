@@ -21,7 +21,7 @@
 
     <p class="text-sm text-gray-600 mt-4 leading-relaxed">
       Do your headphones or IEMs sound too sharp, muffled, or dull? Adjust the specific frequencies causing discomfort
-      until your audio sounds well balanced to your ears.
+      until your audio sounds well balanced to your ears. You can use the tone generator to find peaks
     </p>
 
     <p class="text-sm text-gray-600 mt-4 leading-relaxed">
@@ -172,7 +172,8 @@
     </div>
   </div>
 
-  <br class="removeBand hidden">
+  <button class="removeBand hidden"></button>
+
 </body>
 
 <script>
@@ -200,9 +201,20 @@
   return "Speechless...";
 }
 
+function getQfactor(frequency) {
+  if (frequency < 30) return 0.700;
+  if (frequency < 60) return 0.700;
+  if (frequency < 250) return 1.000;
+  if (frequency < 500) return 1.000;
+  if (frequency < 2000) return 1.500;
+  if (frequency < 4000) return 1.500;
+  if (frequency < 6000) return 2.000;
+  if (frequency < 12000) return 2.500;
+  if (frequency < 20000) return 3.000;
+  return 0.5; //Default
+}
+
   const synth = new Tone.Synth().toDestination();
-
-
 
   function calculatePreamp(gains) {
     if (!Array.isArray(gains) || gains.length === 0) {
@@ -227,7 +239,7 @@
     parametricEq += `Preamp: ${preamp} db`;
 
     for (let i = 0; i != eq.length; i++) {
-      parametricEq += `\nFilter ${i + 1}: ON PK Fc ${eq[i].freq} Hz Gain ${eq[i].db} dB Q 1.000`;
+      parametricEq += `\nFilter ${i + 1}: ON PK Fc ${eq[i].freq} Hz Gain ${eq[i].db} dB Q ${getQfactor(parseInt(eq[i].freq))}`;
     }
 
     const blob = new Blob([parametricEq], { type: 'text/plain' });
@@ -350,8 +362,7 @@
     const bandId = $(this).attr("band-id");
     let freqRemove = bandId.split("_")[0];
     let dbRemove = bandId.split("_")[1];
-
-    console.log(bandId);
+    
     for (let i = 0; i < frequencies.length; i++) {
       if (frequencies[i].freq == freqRemove && frequencies[i].db == dbRemove) {
         frequencies.splice(i, 1);
