@@ -284,7 +284,7 @@
     let freq = $("#eqFreq").val();
     let decibels = parseFloat($('.dbControl').val());
     let hasValues = freq !== "" && decibels !== NaN
-    let bandId = `${freq}_${$('.dbControl').val().split(".")[1]}_${$('.dbControl').val().split(".")[0]}`;
+    let bandId = `${freq}_${$('.dbControl').val().split(".")[0]}_${$('.dbControl').val().split(".")[1]}`;
 
     let eqBand = `<tr id="${bandId}">
     <td>
@@ -325,7 +325,7 @@
         $(document).on("click", ".removeBand", function () {
           const bandId = $(this).attr("band-id");
           let freqRemove = bandId.split("_")[0];
-          let dbRemove = bandId.split("_")[1];
+          let dbRemove = `${bandId.split("_")[1]}.${bandId.split("_")[2]}`;
 
           for (let i = 0; i < frequencies.length; i++) {
             if (frequencies[i].freq == freqRemove && frequencies[i].db == dbRemove) {
