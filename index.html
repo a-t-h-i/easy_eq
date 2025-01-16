@@ -34,7 +34,7 @@
           <div class="col-span-3 p-2">
             <h1 class="text-lg font-bold text-[#374151] mb-4">Tone Generator
               <br>
-              <p class="text-xs text-[#374151] leading-relaxed font-thin">
+              <p class="text-xs text-[#374151] leading-relaxed font-normal">
                 Use the tone generator to help you find peaks.
               </p>
             </h1>
@@ -290,7 +290,7 @@
     <td>
         <div class="m-1 backdrop-blur-sm shadow-md border border-[#374151] rounded-3xl font-black focus:ring-blue-500 p-1 flex items-center w-full">
             <h2 class="text-center w-full font-light text-sm">
-                ${freq}Hz - <span class="underline">${getAdjective(parseInt(freq))}</span> - <strong>${decibels}db</strong>
+                ${freq}Hz - <span class="underline">${getAdjective(parseInt(freq))}</span> <strong>(${decibels}db)</strong>
             </h2>
             <button 
                 class="text-red-400 font-bold border rounded-full p-2 shadow-md hover:scale-110 ml-auto removeBand" 
