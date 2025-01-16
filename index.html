@@ -8,210 +8,228 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
   <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
     integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
-
 </head>
 
-<body class="items-center p-2 bg-slate-100">
+<div class="items-center p-2 flex flex-col h-screen justify-between">
 
-  <div class="text-center">
-    <h4 class="text-2xl font-extrabold text-gray-900">Easy EQ</h4>
-    <p class="text-base text-gray-700 mt-2">
-      Fine-tune your IEMs or headphones to match your listening preferences.
-    </p>
+  <header>
+    <div class="text-center">
+      <h4 class="text-2xl font-extrabold text-[#374151] underline">Easy EQ</h4>
 
-    <p class="text-sm text-gray-600 mt-4 leading-relaxed">
-      Do your headphones or IEMs sound too sharp, muffled, or dull? Adjust the specific frequencies causing discomfort
-      until your audio sounds well balanced to your ears. You can use the tone generator to find peaks
-    </p>
+      <p class="text-sm text-[#374151] p-2">
+        Reduce frequency peaks or add a little bit of <strong>OOMPH</strong> to your sound.
+      </p>
+    </div>
+  </header>
 
-    <p class="text-sm text-gray-600 mt-4 leading-relaxed">Consider exporting this EQ and refining it further using
-      apps like Peace GUI (PC) or Poweramp EQ (Mobile) for advanced adjustments such as shelves and other effects.
-    </p>
-
-  </div>
-
-  <!-- Tuning controls container-->
-  <div class="m-2 flex justify-center items-center h-full">
-
-
-
-    <div
-      class="items-center text-center p-1 grid grid-cols-3 border rounded-3xl tuningControl backdrop-blur-md shadow-md m-2">
-
-      <!-- Tone generator Slider -->
-      <div class="col-span-3">
-        <h1 class="text-lg font-bold text-[#374151] mb-4">Tone Generator</h1>
-
-        <!-- Frequency Display -->
-        <div id="frequencyDisplay" class="text-center text-[#374151] text-xl font-bold mb-4"></div>
-
-        <!-- Slider Only -->
-        <input type="range" id="frequencySlider" min="20" max="20000" value="20"
-          class="w-[70%] h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-[#374151]">
-
-      </div>
-
-
-
-      <!-- Play tone button -->
-      <div class="col-span-1 p-2">
-        <button
-          class="playPauseButton relative p-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
-          <span><svg style="color: #374151;" width="34px" height="34px" viewBox="0 0 24 24" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="roun d"></path>
-              </g>
-            </svg></span>
-        </button>
-      </div>
-
-      <!-- Freq Input-->
-      <div>
-        <input
-          class="w-full text-center border border-gray-300 text-[#374151] text-xl rounded-2xl font-black focus:ring-blue-500 p-2.5 bg-gray-100 m-2"
-          type="number" placeholder="20Hz - 20000Hz" min="20" max="20000" id="eqFreq">
-      </div>
-
-      <!-- Stop tone button -->
-      <div class="col-span-1 p-2">
-        <button
-          class="stopSound relative p-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
-          <span>
-            <svg style="color: #374151;" width="34px" height="34px" viewBox="0 0 24 24" fill="currentColor"
-              xmlns="http://www.w3.org/2000/svg">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path
-                  d="M5 8.14307C3.4148 8.66137 3 9.49393 3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C12.6098 21 13.0337 19.3265 13.2717 17M3 3L21 21M9 4.60756C9.84604 3.71548 10.8038 3 12 3C12.7739 3 13.2484 5.69533 13.4233 9"
-                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-              </g>
-            </svg>
-          </span>
-        </button>
-      </div>
-
-
-      <div class="col-span-3">
-        <button active="0"
-          class="shadow-sm m-2 rounded-xl transition-all duration-300 ease-in-out transform text-[#374151] font-black text-sm border p-2 focus:outline-none addFreq">
-          save
-        </button>
-      </div>
-
-      <!-- Controls -->
-      <div class="m-1">
-        <button
-          class="p-2 border rounded-full w-[45px] h-[45px]  border shadow-md bg-gray-200 font-black transition-all duration-300 ease-in-out decreaseDb hover:scale-110 hover:shadow-md">
-          <span>
-            <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
-              <path
-                d="M13.0607,16.0607 C12.4749,16.6465 11.5251,16.6465 10.9393,16.0607 L5.28249,10.4038 C4.6967,9.81804 4.6967,8.86829 5.28248,8.2825 C5.86827,7.69672 6.81802,7.69672 7.40381,8.2825 L12,12.8787 L16.5962,8.2825 C17.182,7.69672 18.1317,7.69672 18.7175,8.2825 C19.3033,8.86829 19.3033,9.81804 18.7175,10.4038 L13.0607,16.0607 Z"
-                fill="#09244B" />
-            </svg>
-          </span>
-        </button>
-      </div>
+  <main class="mb-auto">
+    <!-- Tuning controls container-->
+    <div class="m-2 flex justify-center items-center h-full lg:max-w-[75%] mx-auto">
 
       <div class="">
-        <input type="number" step="0.1" value="0"
-          class="w-[100%] text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dbControl">
-      </div>
+        <div
+          class="items-center text-center p-1 grid grid-cols-3 border rounded-3xl tuningControl backdrop-blur-md shadow-md m-2 flex">
 
-      <div class="m-1">
-        <button
-          class="p-2 text-center border shadow-md rounded-full w-[45px] h-[45px] bg-gray-200 font-black  transition-all duration-300 ease-in-out increaseDb hover:scale-110 hover:shadow-md">
-          <span>
-            <svg width="25px" height="25px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <title>up_fill</title>
-                <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <g id="Arrow" transform="translate(-434.000000, -48.000000)">
-                    <g id="up_fill" transform="translate(434.000000, 48.000000)">
-                      <path
-                        d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
-                        id="MingCute" fill-rule="nonzero"> </path>
-                      <path
-                        d="M10.9393,7.93932 C11.5251,7.35354 12.4749,7.35354 13.0607,7.93932 L18.7175,13.5962 C19.3033,14.182 19.3033,15.1317 18.7175,15.7175 C18.1317,16.3033 17.182,16.3033 16.5962,15.7175 L12,11.1213 L7.40381,15.7175 C6.81802,16.3033 5.86827,16.3033 5.28248,15.7175 C4.6967,15.1317 4.6967,14.182 5.28249,13.5962 L10.9393,7.93932 Z"
-                        id="路径" fill="#09244B"> </path>
+          <!-- Tone generator Slider -->
+          <div class="col-span-3 p-2">
+            <h1 class="text-lg font-bold text-[#374151] mb-4">Tone Generator
+              <br>
+              <p class="text-xs text-[#374151] leading-relaxed font-thin">
+                Use the tone generator to help you find peaks.
+              </p>
+            </h1>
+
+            <!-- Frequency Display -->
+            <div id="frequencyDisplay" class="text-center text-[#374151] text-xl font-bold mb-4"></div>
+
+            <!-- Slider -->
+            <input type="range" id="frequencySlider" min="20" max="20000" value="20"
+              class="h-2 bg-gray-300 rounded-full appearance-none cursor-pointer accent-[#374151] w-full p-3">
+          </div>
+
+          <!-- Freq Input-->
+          <div class="col-span-3">
+            <input
+              class="w-full text-center border border-gray-300 text-[#374151] text-xl rounded-2xl font-black focus:ring-blue-500 p-2.5 bg-gray-100"
+              type="number" placeholder="20Hz - 20000Hz" min="20" max="20000" id="eqFreq">
+          </div>
+
+
+          <div class="col-span-3 p-2 flex justify-center items-center space-x-4">
+
+            <!-- Play tone button -->
+            <button
+              class="flex justify-center items-center w-[50%] playPauseButton relative p-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
+              <span><svg style="color: #374151;" width="34px" height="34px" viewBox="0 0 24 24" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M19 6C20.5 7.5 21 10 21 12C21 14 20.5 16.5 19 18M16 8.99998C16.5 9.49998 17 10.5 17 12C17 13.5 16.5 14.5 16 15M3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C14 21 14 3 12 3C9 3 7.5 7.5 5.5 8C3.5 8.5 3 9.39543 3 10.5Z"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg></span>
+            </button>
+
+            <!-- Stop tone button -->
+            <button
+              class="flex justify-center items-center  w-[50%] stopSound relative p-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none">
+              <span>
+                <svg style="color: #e05f5f;" width="34px" height="34px" viewBox="0 0 24 24" fill="currentColor"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M5 8.14307C3.4148 8.66137 3 9.49393 3 10.5V13.5C3 14.6046 3.5 15.5 5.5 16C7.5 16.5 9 21 12 21C12.6098 21 13.0337 19.3265 13.2717 17M3 3L21 21M9 4.60756C9.84604 3.71548 10.8038 3 12 3C12.7739 3 13.2484 5.69533 13.4233 9"
+                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="col-span-3">
+            <button active="0"
+              class="shadow-md m-2 rounded-xl transition-all duration-300 ease-in-out transform border border-[#374151] p-2 focus:outline-none addFreq">
+              <span>
+                <svg width="34px" height="34px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g id="Edit / Add_Row">
+                      <path id="Vector"
+                        d="M3 14V15C3 16.1046 3.89543 17 5 17L19 17C20.1046 17 21 16.1046 21 15L21 13C21 11.8954 20.1046 11 19 11H13M10 8H7M7 8H4M7 8V5M7 8V11"
+                        stroke="#374151" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </g>
                   </g>
-                </g>
-              </g>
-            </svg>
-          </span>
-        </button>
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <!-- Controls -->
+          <div class="m-1">
+            <button
+              class="p-2 border border-[#374151] rounded-full w-[45px] h-[45px]  border shadow-md bg-gray-200 font-black transition-all duration-300 ease-in-out decreaseDb hover:scale-110 hover:shadow-md">
+              <span>
+                <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+                  <path
+                    d="M13.0607,16.0607 C12.4749,16.6465 11.5251,16.6465 10.9393,16.0607 L5.28249,10.4038 C4.6967,9.81804 4.6967,8.86829 5.28248,8.2825 C5.86827,7.69672 6.81802,7.69672 7.40381,8.2825 L12,12.8787 L16.5962,8.2825 C17.182,7.69672 18.1317,7.69672 18.7175,8.2825 C19.3033,8.86829 19.3033,9.81804 18.7175,10.4038 L13.0607,16.0607 Z"
+                    fill="#09244B" />
+                </svg>
+              </span>
+            </button>
+          </div>
+
+          <div class="">
+            <input type="number" step="0.1" value="0"
+              class="w-[100%] text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-2xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dbControl">
+          </div>
+
+          <div class="m-1">
+            <button
+              class="p-2 border border-[#374151] text-center border shadow-md rounded-full w-[45px] h-[45px] bg-gray-200 font-black  transition-all duration-300 ease-in-out increaseDb hover:scale-110 hover:shadow-md">
+              <span>
+                <svg width="25px" height="25px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink" fill="currentColor">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <title>up_fill</title>
+                    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <g id="Arrow" transform="translate(-434.000000, -48.000000)">
+                        <g id="up_fill" transform="translate(434.000000, 48.000000)">
+                          <path
+                            d="M24,0 L24,24 L0,24 L0,0 L24,0 Z M12.5934901,23.257841 L12.5819402,23.2595131 L12.5108777,23.2950439 L12.4918791,23.2987469 L12.4918791,23.2987469 L12.4767152,23.2950439 L12.4056548,23.2595131 C12.3958229,23.2563662 12.3870493,23.2590235 12.3821421,23.2649074 L12.3780323,23.275831 L12.360941,23.7031097 L12.3658947,23.7234994 L12.3769048,23.7357139 L12.4804777,23.8096931 L12.4953491,23.8136134 L12.4953491,23.8136134 L12.5071152,23.8096931 L12.6106902,23.7357139 L12.6232938,23.7196733 L12.6232938,23.7196733 L12.6266527,23.7031097 L12.609561,23.275831 C12.6075724,23.2657013 12.6010112,23.2592993 12.5934901,23.257841 L12.5934901,23.257841 Z M12.8583906,23.1452862 L12.8445485,23.1473072 L12.6598443,23.2396597 L12.6498822,23.2499052 L12.6498822,23.2499052 L12.6471943,23.2611114 L12.6650943,23.6906389 L12.6699349,23.7034178 L12.6699349,23.7034178 L12.678386,23.7104931 L12.8793402,23.8032389 C12.8914285,23.8068999 12.9022333,23.8029875 12.9078286,23.7952264 L12.9118235,23.7811639 L12.8776777,23.1665331 C12.8752882,23.1545897 12.8674102,23.1470016 12.8583906,23.1452862 L12.8583906,23.1452862 Z M12.1430473,23.1473072 C12.1332178,23.1423925 12.1221763,23.1452606 12.1156365,23.1525954 L12.1099173,23.1665331 L12.0757714,23.7811639 C12.0751323,23.7926639 12.0828099,23.8018602 12.0926481,23.8045676 L12.108256,23.8032389 L12.3092106,23.7104931 L12.3186497,23.7024347 L12.3186497,23.7024347 L12.3225043,23.6906389 L12.340401,23.2611114 L12.337245,23.2485176 L12.337245,23.2485176 L12.3277531,23.2396597 L12.1430473,23.1473072 Z"
+                            id="MingCute" fill-rule="nonzero"> </path>
+                          <path
+                            d="M10.9393,7.93932 C11.5251,7.35354 12.4749,7.35354 13.0607,7.93932 L18.7175,13.5962 C19.3033,14.182 19.3033,15.1317 18.7175,15.7175 C18.1317,16.3033 17.182,16.3033 16.5962,15.7175 L12,11.1213 L7.40381,15.7175 C6.81802,16.3033 5.86827,16.3033 5.28248,15.7175 C4.6967,15.1317 4.6967,14.182 5.28249,13.5962 L10.9393,7.93932 Z"
+                            id="路径" fill="#09244B"> </path>
+                        </g>
+                      </g>
+                    </g>
+                  </g>
+                </svg>
+              </span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Buttons and EQ settings -->
+        <div class="flex justify-center items-center h-full flex-col col-span-3 w-full">
+
+          <div class="m-1 flex justify-center">
+            <table id="userEq">
+
+            </table>
+          </div>
+
+          <!-- Centered button -->
+          <div class="m-2 flex justify-center w-full">
+            <button
+              class="exportEq border border-[#374151] text-[#374151] p-2 border rounded-lg shadow-md font-black transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-lg">
+              Export
+            </button>
+          </div>
+
+          <div class="m-2">
+            <p class="text-sm text-gray-600 text-center text-[#374151]">Export your adjustments and refine them
+              further using programs like Peace GUI (PC) or Poweramp EQ (Anroid).
+            </p>
+          </div>
+        </div>
+
       </div>
 
     </div>
+  </main>
 
-  </div>
-
-  <!-- Buttons (export, upload etc.) -->
-  <div class="flex justify-center items-center h-full flex-col">
-
-    <div class="m-2 flex justify-center max-h-[70%] grid grid-cols-1" id="userEq">
-
-    </div>
-
-    <!-- Centered button -->
-    <div class="m-2 flex justify-center w-full">
-      <button
-        class="exportEq p-2 border rounded-lg shadow-md bg-gray-200 font-black transition-all duration-300 ease-in-out hover:scale-110 hover:shadow-lg">
-        Export
-      </button>
-    </div>
-  </div>
-
-  <button class="removeBand hidden"></button>
-
-</body>
+  <footer>
+    <footer class="text-center text-[#374151]">
+      <a href="https://github.com/a-t-h-i/easy_eq" class="underline">GitHub</a>
+    </footer>
+  </footer>
+</div>
 
 <script>
   let frequencies = [];
   function getAdjective(frequency) {
-  if (frequency < 30) return "Sub-bass, rumble";
-  if (frequency < 40) return "Deep bass, power";
-  if (frequency < 50) return "Sub-bass, vibration";
-  if (frequency < 70) return "Bass, warmth";
-  if (frequency < 100) return "Bass, punch";
-  if (frequency < 150) return "Bass, fullness";
-  if (frequency < 250) return "Low mids, thickness";
-  if (frequency < 400) return "Low mids, warmth";
-  if (frequency < 600) return "Low mids, richness";
-  if (frequency < 800) return "Midrange, clarity";
-  if (frequency < 1000) return "Midrange, presence";
-  if (frequency < 1500) return "Midrange, open";
-  if (frequency < 2000) return "Midrange, smooth";
-  if (frequency < 3000) return "Upper mids, sharp";
-  if (frequency < 5000) return "High mids, crisp";
-  if (frequency < 8000) return "Presence, clarity";
-  if (frequency < 10000) return "Treble, sparkle";
-  if (frequency < 15000) return "Treble, brightness";
-  if (frequency < 20000) return "High treble, detail";
-  return "Speechless...";
-}
+    if (frequency < 30) return "Sub-bass, rumble";
+    if (frequency < 40) return "Deep bass, power";
+    if (frequency < 50) return "Sub-bass, vibration";
+    if (frequency < 70) return "Bass, warmth";
+    if (frequency < 100) return "Bass, punch";
+    if (frequency < 150) return "Bass, fullness";
+    if (frequency < 250) return "Low mids, thickness";
+    if (frequency < 400) return "Low mids, warmth";
+    if (frequency < 600) return "Low mids, richness";
+    if (frequency < 800) return "Midrange, clarity";
+    if (frequency < 1000) return "Midrange, presence";
+    if (frequency < 1500) return "Midrange, open";
+    if (frequency < 2000) return "Midrange, smooth";
+    if (frequency < 3000) return "Upper mids, sharp";
+    if (frequency < 5000) return "High mids, crisp";
+    if (frequency < 8000) return "Presence, clarity";
+    if (frequency < 10000) return "Treble, sparkle";
+    if (frequency < 15000) return "Treble, brightness";
+    if (frequency < 20000) return "High treble, detail";
+    return "Speechless...";
+  }
 
-function getQfactor(frequency) {
-  if (frequency < 30) return 0.700;
-  if (frequency < 60) return 0.700;
-  if (frequency < 250) return 1.000;
-  if (frequency < 500) return 1.000;
-  if (frequency < 2000) return 1.500;
-  if (frequency < 4000) return 1.500;
-  if (frequency < 6000) return 2.000;
-  if (frequency < 12000) return 2.500;
-  if (frequency < 20000) return 3.000;
-  return 0.5; //Default
-}
+  function getQfactor(frequency) {
+    if (frequency < 30) return 0.700;
+    if (frequency < 60) return 0.700;
+    if (frequency < 250) return 1.000;
+    if (frequency < 500) return 1.000;
+    if (frequency < 2000) return 1.500;
+    if (frequency < 4000) return 1.500;
+    if (frequency < 6000) return 2.000;
+    if (frequency < 12000) return 2.500;
+    if (frequency < 20000) return 3.000;
+    return 0.5; //Default
+  }
 
   const synth = new Tone.Synth().toDestination();
 
@@ -266,33 +284,36 @@ function getQfactor(frequency) {
     let freq = $("#eqFreq").val();
     let decibels = parseFloat($('.dbControl').val());
     let hasValues = freq !== "" && decibels !== NaN
-    let bandId = `${freq}_${decibels}`;
-    
+    let bandId = `${freq}_${$('.dbControl').val().split(".")[1]}_${$('.dbControl').val().split(".")[0]}`;
 
-    let eqBand = `<div id=${bandId}
-        class="m-2 backdrop-blur-sm shadow-md border border-gray-300 text-gray-700 text-xl rounded-3xl font-black focus:ring-blue-500 p-2 bg-gray-100 flex items-center w-full">
-
-        <h2 class="text-center w-full"> ${freq}Hz (${getAdjective(parseInt(freq))}) | ${decibels}db </h2>
-
-        <button class="text-red-400 font-bold border rounded-full p-2 shadow-md hover:scale-110 ml-auto removeBand" band-id="${bandId}">
-          <span>
-            <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-              stroke="#e44949">
-              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-              <g id="SVGRepo_iconCarrier">
-                <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M15.7628 9.5H7.63719C7.18864 9.5 6.82501 9.87295 6.82501 10.333V17C6.82501 18.3807 7.91632 19.5 9.26251 19.5H14.1375C14.784 19.5 15.404 19.2366 15.8611 18.7678C16.3182 18.2989 16.575 17.663 16.575 17V10.333C16.575 9.87295 16.2114 9.5 15.7628 9.5Z"
-                  stroke="#e44949" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                <path
-                  d="M10.8247 12.833C10.8247 12.4188 10.4889 12.083 10.0747 12.083C9.66047 12.083 9.32469 12.4188 9.32469 12.833H10.8247ZM9.32469 16.166C9.32469 16.5802 9.66047 16.916 10.0747 16.916C10.4889 16.916 10.8247 16.5802 10.8247 16.166H9.32469ZM14.0753 12.833C14.0753 12.4188 13.7396 12.083 13.3253 12.083C12.9111 12.083 12.5753 12.4188 12.5753 12.833H14.0753ZM12.5753 16.166C12.5753 16.5802 12.9111 16.916 13.3253 16.916C13.7396 16.916 14.0753 16.5802 14.0753 16.166H12.5753ZM13.418 6.25C13.8322 6.25 14.168 5.91421 14.168 5.5C14.168 5.08579 13.8322 4.75 13.418 4.75V6.25ZM10.1683 4.75C9.75407 4.75 9.41829 5.08579 9.41829 5.5C9.41829 5.91421 9.75407 6.25 10.1683 6.25V4.75ZM16.575 8.25C16.9892 8.25 17.325 7.91421 17.325 7.5C17.325 7.08579 16.9892 6.75 16.575 6.75V8.25ZM6.82501 6.75C6.4108 6.75 6.07501 7.08579 6.07501 7.5C6.07501 7.91421 6.4108 8.25 6.82501 8.25V6.75ZM9.32469 12.833V16.166H10.8247V12.833H9.32469ZM12.5753 12.833V16.166H14.0753V12.833H12.5753ZM13.418 4.75H10.1683V6.25H13.418V4.75ZM16.575 6.75H6.82501V8.25H16.575V6.75Z"
-                  fill="#e44949"></path>
-              </g>
-            </svg>
-          </span>
-        </button>
-      </div>`;
-
+    let eqBand = `<tr id="${bandId}">
+    <td>
+        <div class="m-1 backdrop-blur-sm shadow-md border border-[#374151] rounded-3xl font-black focus:ring-blue-500 p-1 flex items-center w-full">
+            <h2 class="text-center w-full font-light text-sm">
+                ${freq}Hz - <span class="underline">${getAdjective(parseInt(freq))}</span> - <strong>${decibels}db</strong>
+            </h2>
+            <button 
+                class="text-red-400 font-bold border rounded-full p-2 shadow-md hover:scale-110 ml-auto removeBand" 
+                band-id="${bandId}">
+                <span>
+                    <svg width="26px" height="26px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        stroke="#e44949">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M15.7628 9.5H7.63719C7.18864 9.5 6.82501 9.87295 6.82501 10.333V17C6.82501 18.3807 7.91632 19.5 9.26251 19.5H14.1375C14.784 19.5 15.404 19.2366 15.8611 18.7678C16.3182 18.2989 16.575 17.663 16.575 17V10.333C16.575 9.87295 16.2114 9.5 15.7628 9.5Z"
+                                stroke="#e44949" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                            <path
+                                d="M10.8247 12.833C10.8247 12.4188 10.4889 12.083 10.0747 12.083C9.66047 12.083 9.32469 12.4188 9.32469 12.833H10.8247ZM9.32469 16.166C9.32469 16.5802 9.66047 16.916 10.0747 16.916C10.4889 16.916 10.8247 16.5802 10.8247 16.166H9.32469ZM14.0753 12.833C14.0753 12.4188 13.7396 12.083 13.3253 12.083C12.9111 12.083 12.5753 12.4188 12.5753 12.833H14.0753ZM12.5753 16.166C12.5753 16.5802 12.9111 16.916 13.3253 16.916C13.7396 16.916 14.0753 16.5802 14.0753 16.166H12.5753ZM13.418 6.25C13.8322 6.25 14.168 5.91421 14.168 5.5C14.168 5.08579 13.8322 4.75 13.418 4.75V6.25ZM10.1683 4.75C9.75407 4.75 9.41829 5.08579 9.41829 5.5C9.41829 5.91421 9.75407 6.25 10.1683 6.25V4.75ZM16.575 8.25C16.9892 8.25 17.325 7.91421 17.325 7.5C17.325 7.08579 16.9892 6.75 16.575 6.75V8.25ZM6.82501 6.75C6.4108 6.75 6.07501 7.08579 6.07501 7.5C6.07501 7.91421 6.4108 8.25 6.82501 8.25V6.75ZM9.32469 12.833V16.166H10.8247V12.833H9.32469ZM12.5753 12.833V16.166H14.0753V12.833H12.5753ZM13.418 4.75H10.1683V6.25H13.418V4.75ZM16.575 6.75H6.82501V8.25H16.575V6.75Z"
+                                fill="#e44949"></path>
+                        </g>
+                    </svg>
+                </span>
+            </button>
+        </div>
+    </td>
+</tr>`;
     if (frequencies.length < 16 && hasValues) {
       if (parseInt(freq) !== 0 && parseFloat(decibels) !== 0) {
         frequencies.push({ freq: freq, db: decibels });
@@ -300,6 +321,21 @@ function getQfactor(frequency) {
         $("#userEq").append(eqBand);
         $("#eqFreq").val(0);
         $('.dbControl').val(0);
+
+        $(document).on("click", ".removeBand", function () {
+          const bandId = $(this).attr("band-id");
+          let freqRemove = bandId.split("_")[0];
+          let dbRemove = bandId.split("_")[1];
+
+          for (let i = 0; i < frequencies.length; i++) {
+            if (frequencies[i].freq == freqRemove && frequencies[i].db == dbRemove) {
+              frequencies.splice(i, 1);
+              i--;
+            }
+          }
+
+          $(`#${bandId}`).remove();
+        });
       }
     }
   }
@@ -357,20 +393,6 @@ function getQfactor(frequency) {
     SavePEQ(frequencies, calculatePreamp(frequencies))
   });
 
-  $(document).on("click", ".removeBand", function () {
-    const bandId = $(this).attr("band-id");
-    let freqRemove = bandId.split("_")[0];
-    let dbRemove = bandId.split("_")[1];
-    
-    for (let i = 0; i < frequencies.length; i++) {
-      if (frequencies[i].freq == freqRemove && frequencies[i].db == dbRemove) {
-        frequencies.splice(i, 1);
-        i--;
-      }
-    }
-
-    $(`#${bandId}`).remove();
-  });
 
   $(document).on("click", ".addFreq", function () {
     addToEq();
