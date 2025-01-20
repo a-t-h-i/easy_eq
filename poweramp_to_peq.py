@@ -1,7 +1,7 @@
 import json, os
 
 def convert_to_peq(settings):
-    filename = f"""{settings["name"].replace(" ", "_")}.txt"""
+    filename = f"""converted_files/{settings["name"].replace(" ", "_")}.txt"""
     preamp = settings["preamp"]
     bands = settings["bands"]
     filters = []
