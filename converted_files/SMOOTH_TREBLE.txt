@@ -1,0 +1,15 @@
+Preamp: 0.0
+Filter 1: ON LPQ Fc 90Hz Gain 0.0 Q 0.8
+Filter 2: ON HPQ Fc 10000Hz Gain 0.0 Q 0.6
+Filter 3: ON PK Fc 65Hz Gain 2.7 Q 0.85
+Filter 4: ON LS Fc 105Hz Gain -2.5 Q 0.7
+Filter 5: ON PK Fc 2861Hz Gain -1.2 Q 1.5
+Filter 6: ON PK Fc 3256Hz Gain -1.2 Q 1.5
+Filter 7: ON PK Fc 7747Hz Gain -0.7 Q 2.5
+Filter 8: ON PK Fc 8198Hz Gain -2.0 Q 3.0
+Filter 9: ON PK Fc 9485Hz Gain -2.0 Q 3.0
+Filter 10: ON PK Fc 14350Hz Gain -2.0 Q 3.0
+Filter 11: ON PK Fc 14505Hz Gain -2.0 Q 3.0
+Filter 12: ON BP Fc 350Hz Gain 2.7 Q 1.04
+Filter 13: ON PK Fc 800Hz Gain 2.5 Q 1.93
+Filter 14: ON HS Fc 10000Hz Gain -8.3 Q 0.7

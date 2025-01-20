@@ -1,0 +1,120 @@
+[{
+	"name": "SMOOTH_TREBLE",
+	"preamp": 0.0,
+	"parametric": true,
+	"bands": [
+		{
+			"type": 0,
+			"channels": 0,
+			"frequency": 90,
+			"q": 0.800000011920929,
+			"gain": 0.0,
+			"color": 0
+		},
+		{
+			"type": 1,
+			"channels": 0,
+			"frequency": 10000,
+			"q": 0.6000000238418579,
+			"gain": 0.0,
+			"color": 0
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 65,
+			"q": 0.8500000238418579,
+			"gain": 2.7000010013580322,
+			"color": -15649895
+		},
+		{
+			"type": 4,
+			"channels": 0,
+			"frequency": 105,
+			"q": 0.699999988079071,
+			"gain": -2.500000238418579,
+			"color": -15623885
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 2861,
+			"q": 1.5,
+			"gain": -1.2000000476837158,
+			"color": 0
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 3256,
+			"q": 1.5,
+			"gain": -1.2000000476837158,
+			"color": -15649895
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 7747,
+			"q": 2.5,
+			"gain": -0.699999988079071,
+			"color": -15623885
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 8198,
+			"q": 3.0,
+			"gain": -2.0,
+			"color": -6710989
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 9485,
+			"q": 3.0,
+			"gain": -2.0,
+			"color": -7829368
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 14350,
+			"q": 3.0,
+			"gain": -2.0,
+			"color": -6750055
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 14505,
+			"q": 3.0,
+			"gain": -2.0,
+			"color": -7859968
+		},
+		{
+			"type": 2,
+			"channels": 0,
+			"frequency": 350,
+			"q": 1.0442883968353271,
+			"gain": 2.7000010013580322,
+			"color": -8978432
+		},
+		{
+			"type": 3,
+			"channels": 0,
+			"frequency": 800,
+			"q": 1.9272533655166626,
+			"gain": 2.499999523162842,
+			"color": -7829368
+		},
+		{
+			"type": 5,
+			"channels": 0,
+			"frequency": 10000,
+			"q": 0.699999988079071,
+			"gain": -8.300000190734863,
+			"color": -6750055
+		}
+	]
+}
+]
